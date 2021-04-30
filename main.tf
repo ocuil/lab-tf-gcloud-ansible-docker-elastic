@@ -17,7 +17,7 @@ resource "google_compute_instance" "docker_nodes" {
   }
   metadata = {
     app = "elastic-laboratory"
-    ssh-keys = "${var.gcloud["ssh-user"]}:${file(var.gcloud["ssh-key"])}"
+    ssh-keys = "${var.gcloud["ssh-user"]}:${file(var.gcloud["ssh-key-pub"])}"
   }
 
   metadata_startup_script = "sudo apt update -y && sudo apt upgrade -y"
@@ -37,6 +37,8 @@ resource "local_file" "AnsibleInventory" {
     {
       instance-ip = google_compute_instance.docker_nodes[*].network_interface.0.access_config.0.nat_ip
       instance-name = google_compute_instance.docker_nodes[*].name
+      ssh_user = var.gcloud["ssh-user"]
+      ssh_key = var.gcloud["ssh-key-priv"]
     }
   )
   filename = "inventory"

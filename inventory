@@ -1,0 +1,4 @@
+[servers]
+node-0 ansible_host=34.90.171.232 ansible_user=lab ansible_ssh_private_key_file=keys/lab ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+node-1 ansible_host=34.90.205.132 ansible_user=lab ansible_ssh_private_key_file=keys/lab ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+node-2 ansible_host=34.91.251.20 ansible_user=lab ansible_ssh_private_key_file=keys/lab ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
