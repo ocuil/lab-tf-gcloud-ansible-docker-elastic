@@ -27,3 +27,13 @@ Si todo ha ido bien ya podemos eliminar lo que hemos creado
 ```console
 terraform destroy
 ```
+
+## Notas sobre inventory.tmpl
+
+[bastion]
+${bastion-dns} ansible_host=${bastion-ip} # ${bastion-id}
+
+[servers]
+%{ for index, dns in private-dns ~}
+${dns} ansible_host=${private-ip[index]} # ${private-id[index]}
+%{ endfor ~}
