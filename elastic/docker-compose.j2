@@ -1,9 +1,9 @@
 {% if ansible_hostname == 'node-0' %}
-  {% set seed_hosts = [hostvars['node-1'].localip,hostvars['node-2'].localip] %}
+  {% set seed_hosts = [hostvars['node-1'].localip, hostvars['node-2'].localip]|join(',') %}
 {% elif ansible_hostname == 'node-2' %}
-  {% set seed_hosts = [hostvars['node-0'].localip,hostvars['node-2'].localip] %}
+  {% set seed_hosts = [hostvars['node-0'].localip, hostvars['node-2'].localip]|join(',') %}
 {% else %}
-  {% set seed_hosts = [hostvars['node-0'].localip,hostvars['node-1'].localip] %}
+  {% set seed_hosts = [hostvars['node-0'].localip, hostvars['node-1'].localip]|join(',') %}
 {% endif %}
 
 
@@ -18,7 +18,7 @@ services:
       - http.cors.allow-origin=*
       - cluster.name=ElasticLab
       - node.name={{ansible_hostname}}
-      - discovery.seed_hosts={{seed_hosts|string}}
+      - discovery.seed_hosts={{seed_hosts}}
       - cluster.initial_master_nodes={{ hostvars['node-0'].localip }},{{ hostvars['node-1'].localip }},{{ hostvars['node-2'].localip }}
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=elastic

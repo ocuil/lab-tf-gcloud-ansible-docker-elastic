@@ -1,4 +1,0 @@
-[servers]
-node-0 localip=10.164.0.33 ansible_host=34.91.241.181 ansible_user=lab ansible_ssh_private_key_file=keys/lab ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-node-1 localip=10.164.0.34 ansible_host=35.204.43.209 ansible_user=lab ansible_ssh_private_key_file=keys/lab ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-node-2 localip=10.164.0.35 ansible_host=34.91.87.94 ansible_user=lab ansible_ssh_private_key_file=keys/lab ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
