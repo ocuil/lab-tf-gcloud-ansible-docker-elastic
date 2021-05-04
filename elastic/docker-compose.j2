@@ -1,0 +1,37 @@
+{% if ansible_hostname == 'node-0' %}
+  {% set seed_hosts = [hostvars['node-1'].localip,hostvars['node-2'].localip] %}
+{% elif ansible_hostname == 'node-2' %}
+  {% set seed_hosts = [hostvars['node-0'].localip,hostvars['node-2'].localip] %}
+{% else %}
+  {% set seed_hosts = [hostvars['node-0'].localip,hostvars['node-1'].localip] %}
+{% endif %}
+
+
+version: "3.0"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+    container_name: elasticsearch_node
+    environment:
+      - bootstrap.memory_lock=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - cluster.name=ElasticLab
+      - node.name={{ansible_hostname}}
+      - discovery.seed_hosts={{seed_hosts|string}}
+      - cluster.initial_master_nodes={{ hostvars['node-0'].localip }},{{ hostvars['node-1'].localip }},{{ hostvars['node-2'].localip }}
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=elastic
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - "/esdata/:/usr/share/elasticsearch/data"
+      - "/opt/elastic/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+      - "/opt/elastic/certs/:/usr/share/elasticsearch/config/certs"
+    network_mode: host

@@ -1,4 +1,4 @@
 [servers]
 %{ for index, ip in instance-ip ~}
-${instance-name[index]} ansible_host=${instance-ip[index]} ansible_user=${ssh_user} ansible_ssh_private_key_file=${ssh_key} ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+${instance-name[index]} localip=${private-ip[index]} ansible_host=${instance-ip[index]} ansible_user=${ssh_user} ansible_ssh_private_key_file=${ssh_key} ansible_ssh_extra_args='-o StrictHostKeyChecking=no' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 %{ endfor ~}

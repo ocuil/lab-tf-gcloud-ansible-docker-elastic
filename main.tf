@@ -8,7 +8,7 @@ provider "google" {
 resource "google_compute_instance" "docker_nodes" {
   count        = 3
   name         = "node-${count.index}"
-  machine_type = "e2-micro"
+  machine_type = "e2-medium"
   network_interface {
     network = "default"
     access_config {
@@ -16,7 +16,7 @@ resource "google_compute_instance" "docker_nodes" {
     }
   }
   metadata = {
-    app = "elastic-laboratory"
+    app      = "elastic-laboratory"
     ssh-keys = "${var.gcloud["ssh-user"]}:${file(var.gcloud["ssh-key-pub"])}"
   }
 
@@ -35,10 +35,11 @@ resource "google_compute_instance" "docker_nodes" {
 resource "local_file" "AnsibleInventory" {
   content = templatefile("inventory.tmpl",
     {
-      instance-ip = google_compute_instance.docker_nodes[*].network_interface.0.access_config.0.nat_ip
+      instance-ip   = google_compute_instance.docker_nodes[*].network_interface.0.access_config.0.nat_ip
       instance-name = google_compute_instance.docker_nodes[*].name
-      ssh_user = var.gcloud["ssh-user"]
-      ssh_key = var.gcloud["ssh-key-priv"]
+      private-ip    = google_compute_instance.docker_nodes[*].network_interface.0.network_ip
+      ssh_user      = var.gcloud["ssh-user"]
+      ssh_key       = var.gcloud["ssh-key-priv"]
     }
   )
   filename = "inventory"

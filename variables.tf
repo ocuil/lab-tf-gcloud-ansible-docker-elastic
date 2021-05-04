@@ -7,6 +7,6 @@ variable "gcloud" {
     "service_account_key" = "keys/elasticsearch-laboratory-9c640c9da76c.json"
     "ssh-user"            = "lab"
     "ssh-key-pub"         = "keys/lab.pub"
-    "ssh-key-priv"        = "keys/lab.pub"
+    "ssh-key-priv"        = "keys/lab"
   }
 }

@@ -10,3 +10,7 @@ output "id" {
 output "instance_id" {
   value = google_compute_instance.docker_nodes[*].instance_id
 }
+
+output "private_ip" {
+  value = google_compute_instance.docker_nodes[*].network_interface.0.network_ip
+}
