@@ -1,0 +1,8 @@
+---
+- hosts: servers
+  become: true
+  tasks:
+    - name: iniciar Docker Compose
+      shell:
+        cmd: "/usr/local/bin/docker-compose -f /opt/elastic/docker-compose.yml up -d"
+        chdir: /opt/elastic/
