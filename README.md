@@ -19,3 +19,7 @@ ansible-playbook -i inventory start_docker-compose.yml
 #Una vez terminamos eliminamos el despliegue
 tf destroy
 ```
+
+## Ejemplo en video
+
+[![asciicast](https://asciinema.org/a/411925.svg)](https://asciinema.org/a/411925)
