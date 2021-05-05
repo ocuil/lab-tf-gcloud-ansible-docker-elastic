@@ -4,7 +4,7 @@ Laboratorio para desplegar un mini cluster de elasticsearch sobre dockers automa
 
 ## Lanzar el laboratorio
 
-````bash
+```bash
 #Creamos el plan de despliegue
 tf plan -out=plan
 #Desplegamos el plan sobre Google Cloud
@@ -18,5 +18,4 @@ ansible-playbook -i inventory elastic_deploy.yml
 ansible-playbook -i inventory start_docker-compose.yml
 #Una vez terminamos eliminamos el despliegue
 tf destroy
-```troy
-````
+```
